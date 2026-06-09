@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>m295</groupId>
+    <groupId>org.example</groupId>
     <artifactId>LB295JolaMali</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -34,7 +34,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Hibernate Core (kein Spring Data JPA) -->
+        <!-- Hibernate Core -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -45,13 +45,6 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
-        </dependency>
-
-        <!-- Swagger / OpenAPI Annotationen -->
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations-jakarta</artifactId>
-            <version>2.2.20</version>
         </dependency>
 
         <!-- Log4j -->
@@ -68,7 +61,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- HttpClient fuer Integration Tests -->
+        <!-- HttpClient for integration tests -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

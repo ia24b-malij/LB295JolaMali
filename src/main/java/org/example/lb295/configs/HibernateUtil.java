@@ -1,4 +1,4 @@
-package org.example.lb295;
+package org.example.lb295.configs;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
