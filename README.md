@@ -11,12 +11,12 @@
 Dieses Projekt ist eine Backend-Schnittstelle zur Verwaltung von Rezepten und Kategorien.  
 Die API wurde mit **Jakarta EE**, **Jersey**, **Hibernate**, **MySQL**, **Maven** und **Tomcat** umgesetzt.
 
-Die Datenquelle besteht aus zwei verbundenen Tabellen:
+Die Datenquelle besteht aus zwei miteinander verbundenen Tabellen:
 
-- `Kategorie` als Haupttabelle
-- `Rezept` als verknüpfte Tabelle
+- `Kategorie`
+- `Rezept`
 
-Die Beziehung ist eine **1:n-Beziehung**:
+Die beiden Tabellen stehen in einer **1:n-Beziehung**:
 
 ```text
 Eine Kategorie kann mehrere Rezepte haben.
