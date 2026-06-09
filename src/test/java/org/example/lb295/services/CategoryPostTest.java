@@ -1,4 +1,4 @@
-package org.example.lb295.services;
+﻿package org.example.lb295.services;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.*;
@@ -20,9 +20,9 @@ public class CategoryPostTest {
     private static final String BASE_URL =
             "http://localhost:8080/LB295JolaMali_war_exploded/api/kategorien";
     private static final String AUTH_ADMIN =
-            "Basic " + Base64.getEncoder().encodeToString("admin:admin123".getBytes(StandardCharsets.ISO_8859_1));
+            "Basic " + Base64.getEncoder().encodeToString("admin:1234".getBytes(StandardCharsets.ISO_8859_1));
     private static final String AUTH_USER =
-            "Basic " + Base64.getEncoder().encodeToString("user:user123".getBytes(StandardCharsets.ISO_8859_1));
+            "Basic " + Base64.getEncoder().encodeToString("user:1234".getBytes(StandardCharsets.ISO_8859_1));
 
     @Test
     public void createPositiv() throws Exception {

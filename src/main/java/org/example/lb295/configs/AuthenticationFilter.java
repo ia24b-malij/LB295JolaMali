@@ -57,13 +57,16 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	}
 
 	private boolean isUserAllowed(final String username, final String password, final Set<String> rolesSet) {
-		boolean isAllowed = false;
+		String userRole = null;
 		if (username.equals("admin") && password.equals("1234")) {
-			String userRole = "ADMIN";
-			if (rolesSet.contains(userRole)) {
-				isAllowed = true;
-			}
+			userRole = "ADMIN";
 		}
-		return isAllowed;
+		if (username.equals("user") && password.equals("1234")) {
+			userRole = "USER";
+		}
+		if (userRole == null) {
+			return false;
+		}
+		return rolesSet.contains(userRole);
 	}
 }
