@@ -1,0 +1,495 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LB295 Recipe API",
+    "description": "REST API for managing recipes and categories. Authentication via HTTP Basic Auth.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/LB295JolaMali_war_exploded/api"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "Kategorie": {
+        "type": "object",
+        "properties": {
+          "kategorieId": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Desserts"
+          }
+        }
+      },
+      "Rezept": {
+        "type": "object",
+        "properties": {
+          "rezeptId": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Spaghetti Bolognese"
+          },
+          "beschreibung": {
+            "type": "string",
+            "example": "Classic Italian dish"
+          },
+          "zubereitungszeit": {
+            "type": "integer",
+            "example": 30
+          },
+          "vegetarisch": {
+            "type": "boolean",
+            "example": false
+          },
+          "bewertung": {
+            "type": "number",
+            "format": "float",
+            "example": 4.5
+          },
+          "kosten": {
+            "type": "number",
+            "format": "float",
+            "example": 12.50
+          },
+          "erstelltAm": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-01-01T00:00:00Z"
+          },
+          "kategorie": {
+            "$ref": "#/components/schemas/Kategorie"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/rezepte/ping": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "pingRezepte",
+        "responses": {
+          "200": {
+            "description": "API is running",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "API is running"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rezepte": {
+      "get": {
+        "summary": "Get all recipes",
+        "operationId": "getAlleRezepte",
+        "responses": {
+          "200": {
+            "description": "List of all recipes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rezept"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authenticated"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new recipe",
+        "operationId": "createRezept",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rezept"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Recipe successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rezept"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data (validation error)"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          }
+        }
+      }
+    },
+    "/rezepte/count": {
+      "get": {
+        "summary": "Get total recipe count",
+        "operationId": "countRezepte",
+        "responses": {
+          "200": {
+            "description": "Number of recipes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": 42
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rezepte/filter": {
+      "get": {
+        "summary": "Filter recipes",
+        "operationId": "filterRezepte",
+        "parameters": [
+          {
+            "name": "vegetarisch",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          },
+          {
+            "name": "minBewertung",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "example": 3.5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filtered recipe list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rezept"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rezepte/{id}": {
+      "get": {
+        "summary": "Get recipe by ID",
+        "operationId": "getRezeptById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recipe found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rezept"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recipe not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a recipe",
+        "operationId": "updateRezept",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rezept"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Recipe successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rezept"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data (validation error)"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          },
+          "404": {
+            "description": "Recipe not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a recipe",
+        "operationId": "deleteRezept",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recipe successfully deleted"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          },
+          "404": {
+            "description": "Recipe not found"
+          }
+        }
+      }
+    },
+    "/rezepte/vor/{datum}": {
+      "delete": {
+        "summary": "Delete all recipes before a given date",
+        "operationId": "deleteRezepteVorDatum",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "datum",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2026-01-01T00:00:00Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recipes successfully deleted"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          }
+        }
+      }
+    },
+    "/kategorien": {
+      "get": {
+        "summary": "Get all categories",
+        "operationId": "getAlleKategorien",
+        "responses": {
+          "200": {
+            "description": "List of all categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Kategorie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new category",
+        "operationId": "createKategorie",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Kategorie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Kategorie"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data (name missing or empty)"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          }
+        }
+      }
+    },
+    "/kategorien/{id}": {
+      "put": {
+        "summary": "Update a category",
+        "operationId": "updateKategorie",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Kategorie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Kategorie"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data (name missing or empty)"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a category",
+        "operationId": "deleteKategorie",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category successfully deleted"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          },
+          "409": {
+            "description": "Conflict – category still contains recipes"
+          }
+        }
+      }
+    }
+  }
+}
