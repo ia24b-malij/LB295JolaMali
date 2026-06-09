@@ -91,21 +91,7 @@ src
 
 ## 6. ERD
 
-```text
-+-------------------+          +-------------------+
-|    Kategorie      | 1      n |      Rezept       |
-+-------------------+----------+-------------------+
-| KategorieId (PK)  |          | RezeptId (PK)     |
-| Name              |          | Name              |
-+-------------------+          | Beschreibung      |
-                               | Zubereitungszeit  |
-                               | Vegetarisch       |
-                               | Bewertung         |
-                               | Kosten            |
-                               | ErstelltAm        |
-                               | KategorieId (FK)  |
-                               +-------------------+
-```
+![ERD](docs/erd.png)
 
 ---
 
@@ -254,7 +240,14 @@ Die Tests sind nach HTTP-Methode aufgeteilt: `RecipeGetTest`, `RecipePostTest`, 
 
 ### Screenshot Testausführung
 
-![Testfälle](docs/tests_screenshot.png)
+![GET Recipe Tests](docs/test-screenshots/TestsGetRecipe.png)
+![GET Category Tests](docs/test-screenshots/TestsGetCategory.png)
+![POST Recipe Tests](docs/test-screenshots/TestPostRecipe.png)
+![POST Tests](docs/test-screenshots/TestsPost.png)
+![PUT Recipe Tests](docs/test-screenshots/TestPutRecipe.png)
+![PUT Category Tests](docs/test-screenshots/TestPutCategory.png)
+![DELETE Recipe Tests](docs/test-screenshots/TestDeleteRecipe.png)
+![DELETE Tests](docs/test-screenshots/TestsDelete.png)
 
 ---
 
