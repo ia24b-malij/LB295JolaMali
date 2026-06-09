@@ -28,7 +28,7 @@ public class CategoryResource {
     }
 
     @POST
-    @RolesAllowed("USER")
+    @RolesAllowed({"ADMIN", "USER"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Category category) {
@@ -44,7 +44,7 @@ public class CategoryResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("USER")
+    @RolesAllowed({"ADMIN", "USER"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") int id, Category category) {

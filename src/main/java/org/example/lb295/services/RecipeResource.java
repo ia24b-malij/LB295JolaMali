@@ -108,7 +108,7 @@ public class RecipeResource {
     }
 
     @POST
-    @RolesAllowed("USER")
+    @RolesAllowed({"ADMIN", "USER"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Recipe recipe) {
@@ -121,7 +121,7 @@ public class RecipeResource {
 
     @POST
     @Path("/batch")
-    @RolesAllowed("USER")
+    @RolesAllowed({"ADMIN", "USER"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBatch(List<Recipe> rezepte) {
@@ -136,7 +136,7 @@ public class RecipeResource {
 
     @POST
     @Path("/init")
-    @RolesAllowed("ADMIN")
+    @RolesAllowed({"ADMIN", "USER"})
     @Produces(MediaType.TEXT_PLAIN)
     public Response init() {
         logger.info("POST init - Creating seed data");
@@ -147,7 +147,7 @@ public class RecipeResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("USER")
+    @RolesAllowed({"ADMIN", "USER"})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") int id, Recipe recipe) {

@@ -19,7 +19,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
 
-@Provider
 public class AuthenticationFilter implements ContainerRequestFilter {
 
 	@Context
@@ -58,14 +57,13 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 	}
 
 	private boolean isUserAllowed(final String username, final String password, final Set<String> rolesSet) {
-		// user -> ROLE_USER
-		if (username.equals("user") && password.equals("user123")) {
-			return rolesSet.contains("USER");
+		boolean isAllowed = false;
+		if (username.equals("admin") && password.equals("1234")) {
+			String userRole = "ADMIN";
+			if (rolesSet.contains(userRole)) {
+				isAllowed = true;
+			}
 		}
-		// admin -> ROLE_ADMIN und USER
-		if (username.equals("admin") && password.equals("admin123")) {
-			return rolesSet.contains("ADMIN") || rolesSet.contains("USER");
-		}
-		return false;
+		return isAllowed;
 	}
 }
