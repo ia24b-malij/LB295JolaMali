@@ -1,4 +1,4 @@
-﻿package org.example.lb295.services;
+package org.example.lb295.services;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.*;
