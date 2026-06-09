@@ -133,21 +133,20 @@ Die API verwendet Basic Authentication mit zwei Rollen zusätzlich zu `PermitAll
 
 | Endpunkt | PermitAll | USER | ADMIN |
 |---|---:|---:|---:|
-| GET /rezepte/ping | Ja | Ja | Ja |
-| GET /rezepte | Ja | Ja | Ja |
-| GET /rezepte/{id} | Ja | Ja | Ja |
-| GET /rezepte/count | Ja | Ja | Ja |
-| GET /rezepte/filter | Ja | Ja | Ja |
-| POST /rezepte | Nein | Ja | Ja |
-| POST /rezepte/batch | Nein | Ja | Ja |
-| POST /rezepte/init | Nein | Ja | Ja |
-| PUT /rezepte/{id} | Nein | Ja | Ja |
-| DELETE /rezepte/{id} | Nein | Nein | Ja |
-| DELETE /rezepte/vor/{datum} | Nein | Nein | Ja |
-| GET /kategorien | Ja | Ja | Ja |
-| POST /kategorien | Nein | Ja | Ja |
-| PUT /kategorien/{id} | Nein | Ja | Ja |
-| DELETE /kategorien/{id} | Nein | Nein | Ja |
+| GET /api/rezepte/ping | Ja | Ja | Ja |
+| GET /api/rezepte | Ja | Ja | Ja |
+| GET /api/rezepte/{id} | Ja | Ja | Ja |
+| GET /api/rezepte/count | Ja | Ja | Ja |
+| GET /api/rezepte/filter | Ja | Ja | Ja |
+| POST /api/rezepte | Nein | Ja | Ja |
+| POST /api/rezepte/batch | Nein | Ja | Ja |
+| PUT /api/rezepte/{id} | Nein | Ja | Ja |
+| DELETE /api/rezepte/{id} | Nein | Nein | Ja |
+| DELETE /api/rezepte/vor/{datum} | Nein | Nein | Ja |
+| GET /api/kategorien | Ja | Ja | Ja |
+| POST /api/kategorien | Nein | Ja | Ja |
+| PUT /api/kategorien/{id} | Nein | Ja | Ja |
+| DELETE /api/kategorien/{id} | Nein | Nein | Ja |
 
 ---
 
