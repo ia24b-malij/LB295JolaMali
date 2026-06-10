@@ -278,6 +278,8 @@ Folgende Aktionen werden protokolliert:
 - POST-Anfragen
 - PUT-Anfragen
 - DELETE-Anfragen
+- Erfolgreiche Operationen
+- Fehlgeschlagene Operationen
 - Validierungsfehler
 - Nicht gefundene Datensätze
 
