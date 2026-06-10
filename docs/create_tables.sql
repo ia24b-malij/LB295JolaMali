@@ -1,34 +1,43 @@
 -- Datenbank erstellen
-CREATE DATABASE IF NOT EXISTS lb295_db;
-USE lb295_db;
+CREATE DATABASE IF NOT EXISTS `lb295_db`
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
--- Tabelle Kategorie (Tabelle B)
-CREATE TABLE IF NOT EXISTS Kategorie (
-    KategorieId INT AUTO_INCREMENT PRIMARY KEY,
-    Name        VARCHAR(45) NOT NULL
-);
+USE `lb295_db`;
 
--- Tabelle Rezept (Tabelle A)
-CREATE TABLE IF NOT EXISTS Rezept (
-    RezeptId          INT AUTO_INCREMENT PRIMARY KEY,
-    KategorieId       INT NOT NULL,
-    Name              VARCHAR(100) NOT NULL,
-    Beschreibung      VARCHAR(500),
-    Zubereitungszeit  INT NOT NULL,
-    Kosten            DECIMAL(10, 2),
-    ErstelltAm        DATETIME,
-    Vegetarisch       BOOLEAN,
-    Bewertung         DECIMAL(3, 1),
-    CONSTRAINT fk_kategorie FOREIGN KEY (KategorieId) REFERENCES Kategorie(KategorieId)
-);
+-- Tabelle kategorie
+DROP TABLE IF EXISTS `rezept`;
+DROP TABLE IF EXISTS `kategorie`;
 
--- Seed-Daten Kategorie
-INSERT INTO Kategorie (Name) VALUES ('Italienisch');
-INSERT INTO Kategorie (Name) VALUES ('Asiatisch');
+CREATE TABLE `kategorie` (
+  `KategorieId` int(11)     NOT NULL AUTO_INCREMENT,
+  `Name`        varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`KategorieId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Seed-Daten Rezept
-INSERT INTO Rezept (KategorieId, Name, Beschreibung, Zubereitungszeit, Kosten, ErstelltAm, Vegetarisch, Bewertung)
-VALUES (1, 'Spaghetti Carbonara', 'Klassisches italienisches Pasta-Gericht', 30, 12.50, '2026-05-01 12:00:00', false, 4.5);
+-- Tabelle rezept
+CREATE TABLE `rezept` (
+  `RezeptId`         int(11)       NOT NULL AUTO_INCREMENT,
+  `Beschreibung`     varchar(500)  DEFAULT NULL,
+  `Bewertung`        decimal(3,1)  DEFAULT NULL,
+  `ErstelltAm`       datetime(6)   DEFAULT NULL,
+  `Kosten`           decimal(10,2) DEFAULT NULL,
+  `Name`             varchar(100)  DEFAULT NULL,
+  `Vegetarisch`      bit(1)        DEFAULT NULL,
+  `Zubereitungszeit` int(11)       DEFAULT NULL,
+  `KategorieId`      int(11)       DEFAULT NULL,
+  PRIMARY KEY (`RezeptId`),
+  CONSTRAINT `FK_rezept_kategorie`
+    FOREIGN KEY (`KategorieId`) REFERENCES `kategorie` (`KategorieId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO Rezept (KategorieId, Name, Beschreibung, Zubereitungszeit, Kosten, ErstelltAm, Vegetarisch, Bewertung)
-VALUES (2, 'Pad Thai', 'Gebratene Reisnudeln mit Erdnuessen', 25, 10.00, '2026-05-05 18:00:00', true, 4.0);
+-- Seed-Daten: kategorie
+INSERT INTO `kategorie` (`Name`) VALUES ('Italienisch');
+INSERT INTO `kategorie` (`Name`) VALUES ('Asiatisch');
+
+-- Seed-Daten: rezept
+INSERT INTO `rezept` (`Name`, `Beschreibung`, `Zubereitungszeit`, `Vegetarisch`, `Bewertung`, `Kosten`, `ErstelltAm`, `KategorieId`)
+VALUES ('Spaghetti Carbonara', 'Klassisches italienisches Pasta-Gericht', 30, 0, 4.5, 12.50, '2026-05-01 12:00:00', 1);
+
+INSERT INTO `rezept` (`Name`, `Beschreibung`, `Zubereitungszeit`, `Vegetarisch`, `Bewertung`, `Kosten`, `ErstelltAm`, `KategorieId`)
+VALUES ('Pad Thai', 'Gebratene Reisnudeln mit Erdnuessen', 25, 1, 4.0, 10.00, '2026-05-05 18:00:00', 2);
