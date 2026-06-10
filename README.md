@@ -297,6 +297,97 @@ Beispiele:
 
 ---
 
-## 17. Autor
+## 17. Beispiel-Requests (Postman)
+
+### Rezepte
+
+**POST /api/rezepte** – Rezept erstellen
+- Auth: Basic Auth → `user` / `1234`
+```json
+{
+  "name": "Pasta",
+  "zubereitungszeit": 20,
+  "vegetarisch": true,
+  "bewertung": 4.5,
+  "erstelltAm": "2026-01-01T10:00:00",
+  "kategorie": {
+    "kategorieId": 1
+  }
+}
+```
+
+**POST /api/rezepte/batch** – Mehrere Rezepte erstellen
+- Auth: Basic Auth → `user` / `1234`
+```json
+[
+  {
+    "name": "Pasta",
+    "zubereitungszeit": 20,
+    "vegetarisch": true,
+    "bewertung": 4.5,
+    "erstelltAm": "2026-01-01T10:00:00",
+    "kategorie": { "kategorieId": 1 }
+  },
+  {
+    "name": "Pizza",
+    "zubereitungszeit": 30,
+    "vegetarisch": false,
+    "bewertung": 4.0,
+    "erstelltAm": "2026-01-01T10:00:00",
+    "kategorie": { "kategorieId": 1 }
+  }
+]
+```
+
+**PUT /api/rezepte/{id}** – Rezept aktualisieren
+- Auth: Basic Auth → `user` / `1234`
+```json
+{
+  "name": "Pasta Updated",
+  "zubereitungszeit": 25,
+  "vegetarisch": true,
+  "bewertung": 3.5,
+  "erstelltAm": "2026-01-01T10:00:00",
+  "kategorie": {
+    "kategorieId": 1
+  }
+}
+```
+
+**GET /api/rezepte/filter** – Rezepte filtern
+- Kein Body, Query-Parameter in der URL:
+```
+/api/rezepte/filter?vegetarisch=true
+/api/rezepte/filter?minBewertung=3.5
+```
+
+**DELETE /api/rezepte/vor/{datum}** – Rezepte vor Datum löschen
+- Auth: Basic Auth → `admin` / `1234`
+- Kein Body, Datum in der URL:
+```
+/api/rezepte/vor/2026-01-01T10:00:00
+```
+
+### Kategorien
+
+**POST /api/kategorien** – Kategorie erstellen
+- Auth: Basic Auth → `user` / `1234`
+```json
+{
+  "name": "Italienisch"
+}
+```
+
+**PUT /api/kategorien/{id}** – Kategorie aktualisieren
+- Auth: Basic Auth → `user` / `1234`
+```json
+{
+  "name": "Asiatisch"
+}
+```
+
+---
+
+## 18. Autor
 
 Jola Mali
