@@ -127,4 +127,38 @@ public class RecipeDAO {
             return anzahl;
         }
     }
+
+    public void createSeedData() {
+        CategoryDAO categoryDAO = new CategoryDAO();
+
+        Category k1 = new Category();
+        k1.setName("Italienisch");
+        Category k2 = new Category();
+        k2.setName("Asiatisch");
+        k1 = categoryDAO.create(k1);
+        k2 = categoryDAO.create(k2);
+
+        Recipe r1 = new Recipe();
+        r1.setName("Spaghetti Carbonara");
+        r1.setBeschreibung("Classic Italian pasta dish");
+        r1.setZubereitungszeit(30);
+        r1.setKosten(new BigDecimal("12.50"));
+        r1.setErstelltAm(LocalDateTime.now().minusDays(10));
+        r1.setVegetarisch(false);
+        r1.setBewertung(new BigDecimal("4.5"));
+        r1.setKategorie(k1);
+
+        Recipe r2 = new Recipe();
+        r2.setName("Pad Thai");
+        r2.setBeschreibung("Fried rice noodles with peanuts");
+        r2.setZubereitungszeit(25);
+        r2.setKosten(new BigDecimal("10.00"));
+        r2.setErstelltAm(LocalDateTime.now().minusDays(5));
+        r2.setVegetarisch(true);
+        r2.setBewertung(new BigDecimal("4.0"));
+        r2.setKategorie(k2);
+
+        create(r1);
+        create(r2);
+    }
 }

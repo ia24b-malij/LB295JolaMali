@@ -134,6 +134,17 @@ public class RecipeResource {
                 .entity(recipeDAO.createBatch(rezepte)).build();
     }
 
+    @POST
+    @Path("/init")
+    @RolesAllowed({"ADMIN", "USER"})
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response init() {
+        logger.info("POST init - Creating seed data");
+        recipeDAO.createSeedData();
+        return Response.status(Response.Status.CREATED)
+                .entity("Seed data created successfully.").build();
+    }
+
     @PUT
     @Path("/{id}")
     @RolesAllowed({"ADMIN", "USER"})

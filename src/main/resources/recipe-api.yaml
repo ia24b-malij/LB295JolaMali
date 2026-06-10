@@ -216,6 +216,23 @@
         }
       }
     },
+    "/rezepte/init": {
+      "post": {
+        "summary": "Create seed data",
+        "operationId": "initRezepte",
+        "security": [
+          { "basicAuth": [] }
+        ],
+        "responses": {
+          "201": {
+            "description": "Seed data created successfully"
+          },
+          "401": {
+            "description": "Not authenticated or insufficient permissions"
+          }
+        }
+      }
+    },
     "/rezepte/{id}": {
       "get": {
         "summary": "Get recipe by ID",

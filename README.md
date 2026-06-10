@@ -140,6 +140,7 @@ Die API verwendet Basic Authentication mit zwei Rollen zusätzlich zu `PermitAll
 | GET /api/rezepte/filter | Ja | Ja | Ja |
 | POST /api/rezepte | Nein | Ja | Ja |
 | POST /api/rezepte/batch | Nein | Ja | Ja |
+| POST /api/rezepte/init | Nein | Ja | Ja |
 | PUT /api/rezepte/{id} | Nein | Ja | Ja |
 | DELETE /api/rezepte/{id} | Nein | Nein | Ja |
 | DELETE /api/rezepte/vor/{datum} | Nein | Nein | Ja |
@@ -338,6 +339,10 @@ Beispiele:
   }
 ]
 ```
+
+**POST /api/rezepte/init** – Seed-Daten erstellen
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
+- Kein Body benötigt
 
 **PUT /api/rezepte/{id}** – Rezept aktualisieren
 - Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`

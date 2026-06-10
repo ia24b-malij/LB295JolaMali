@@ -108,6 +108,17 @@ public class RecipePostTest {
     }
 
     @Test
+    public void initPositiv() throws Exception {
+        HttpPost request = new HttpPost(BASE_URL + "/init");
+        request.setHeader(HttpHeaders.AUTHORIZATION, AUTH_ADMIN);
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            CloseableHttpResponse response = client.execute(request);
+            System.out.println("POST init: " + EntityUtils.toString(response.getEntity()));
+            assertEquals(HttpStatus.SC_CREATED, response.getStatusLine().getStatusCode());
+        }
+    }
+
+    @Test
     public void createBatchPositiv() throws Exception {
         HttpPost request = new HttpPost(BASE_URL + "/batch");
         request.setHeader(HttpHeaders.AUTHORIZATION, AUTH_USER);
