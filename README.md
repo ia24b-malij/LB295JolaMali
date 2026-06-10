@@ -238,6 +238,14 @@ Die Tests sind nach HTTP-Methode aufgeteilt: `RecipeGetTest`, `RecipePostTest`, 
 - Kein Login bei geschützten Endpunkten liefert `401 Unauthorized`
 - Kategorie mit verknüpften Rezepten löschen liefert `409 Conflict`
 
+### Detaillierter Testbericht
+
+Der vollständige Testbericht kann im Browser geöffnet werden:
+
+```text
+docs/test-screenshots/Test Results - java_in_LB295JolaMali.html
+```
+
 ### Screenshot Testausführung
 
 ![GET Recipe Tests](docs/test-screenshots/TestsGetRecipe.png)
