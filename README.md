@@ -388,6 +388,22 @@ Beispiele:
 
 ---
 
-## 18. Autor
+## 18. Zusammenfassung
+
+In diesem Projekt habe ich eine REST API für die Verwaltung von Rezepten und Kategorien entwickelt. Die Umsetzung erfolgte mit Jakarta EE, Jersey, Hibernate und MySQL auf einem externen Tomcat-Server.
+
+Am Anfang war die Projektstruktur nicht ganz einfach. Die Pakete mussten mehrmals umstrukturiert werden, weil die Leistungsbeurteilung spezifische Anforderungen hatte, zum Beispiel dass die Resource-Klassen im Package `services` sein müssen und eine separate DAO-Schicht vorhanden sein soll. Das war etwas verwirrend am Anfang, weil ich zuerst alles anders aufgebaut hatte und es dann komplett umstrukturieren musste. Dazu kam noch ein Bug mit `mappedBy="kategorie"` der eigentlich `mappedBy="category"` hätte sein sollen, was eine Weile gedauert hat bis ich es gefunden habe, weil der Fehler nicht sofort offensichtlich war.
+
+Auch mit der Authentifizierung gab es eine Schwierigkeit. Ich hatte erwartet dass bei einer falschen Rolle `403 Forbidden` zurückkommt, was eigentlich auch logisch gewesen wäre. Aber der Filter gibt in beiden Fällen, also sowohl bei fehlendem Login als auch bei falscher Rolle, `401 Unauthorized` zurück. Das hat dazu geführt dass mehrere Testfälle angepasst werden mussten. Generell war das Schreiben der Tests aufwändiger als erwartet, weil ich für jeden Test im `@BeforeEach` zuerst Testdaten erstellen musste damit die Tests unabhängig voneinander laufen.
+
+Was gut geklappt hat war die Aufteilung der Tests nach HTTP-Methode in separate Klassen. Das hat die Übersicht deutlich verbessert und es war einfacher einzelne Testfälle zu finden und zu debuggen. Auch die Validierung mit fünf verschiedenen Regeln auf unterschiedlichen Datentypen konnte ich sauber umsetzen und mit entsprechenden Testfällen absichern.
+
+Die OpenAPI Dokumentation war auch ein neues Thema für mich. Ich musste lernen wie man Schemas, Security-Schemes und Response-Codes korrekt definiert, was anfangs etwas Zeit gebraucht hat.
+
+Insgesamt bin ich zufrieden mit dem Ergebnis. Die API funktioniert, alle Tests laufen durch und das Projekt ist sauber strukturiert und dokumentiert. Durch dieses Projekt habe ich viel gelernt, vor allem im Umgang mit REST APIs, Hibernate, dem Deployment auf Tomcat und dem Schreiben von Integrationstests.
+
+---
+
+## 19. Autor
 
 Jola Mali
