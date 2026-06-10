@@ -302,7 +302,7 @@ Beispiele:
 ### Rezepte
 
 **POST /api/rezepte** – Rezept erstellen
-- Auth: Basic Auth → `user` / `1234`
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
 ```json
 {
   "name": "Pasta",
@@ -317,7 +317,7 @@ Beispiele:
 ```
 
 **POST /api/rezepte/batch** – Mehrere Rezepte erstellen
-- Auth: Basic Auth → `user` / `1234`
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
 ```json
 [
   {
@@ -340,7 +340,7 @@ Beispiele:
 ```
 
 **PUT /api/rezepte/{id}** – Rezept aktualisieren
-- Auth: Basic Auth → `user` / `1234`
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
 ```json
 {
   "name": "Pasta Updated",
@@ -371,7 +371,7 @@ Beispiele:
 ### Kategorien
 
 **POST /api/kategorien** – Kategorie erstellen
-- Auth: Basic Auth → `user` / `1234`
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
 ```json
 {
   "name": "Italienisch"
@@ -379,7 +379,7 @@ Beispiele:
 ```
 
 **PUT /api/kategorien/{id}** – Kategorie aktualisieren
-- Auth: Basic Auth → `user` / `1234`
+- Auth: Basic Auth → `user` / `1234` oder `admin` / `1234`
 ```json
 {
   "name": "Asiatisch"
